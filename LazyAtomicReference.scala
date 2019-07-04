@@ -1,7 +1,3 @@
-import java.util.concurrent.atomic.AtomicReference
-import scala.concurrent._
-import scala.concurrent.duration.Duration
-
 class LazyAtomicReference[T](@volatile var value: T = null) {
     def compareAndSet(v: => T, u: => T) = {
         if (value == v) {
@@ -32,6 +28,9 @@ class Foo {
         s.get
     }
 }
+
+import scala.concurrent._
+import scala.concurrent.duration.Duration
 
 val f = new Foo
 implicit val ec = scala.concurrent.ExecutionContext.global
