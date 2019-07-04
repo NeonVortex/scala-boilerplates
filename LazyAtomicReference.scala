@@ -28,7 +28,7 @@ class Foo {
     }
 
     def get() = {
-        s.compareAndSet(null, foo())
+        s.compareAndSet(null, ()=>foo())
         s.get
     }
 }
