@@ -1,17 +1,22 @@
-class LazyAtomicReference[T](@volatile var value: T = null) {
-    def compareAndSet(v: T, u: => T) = {
-        if (value == v) {
-            synchronized {
-                if(value == v) {
-                    value = u
+import java.util.concurrent.atomic.AtomicReference
+
+class LazyAtomicReference[T](value: T = null) extends AtomicReference(value) {
+    
+    def compareAndSet(v: T, u: () => T): Boolean =
+        compareAndSetLazy(v, u.apply)
+
+    def compareAndSetLazy(v: T, u: => T): Boolean = {
+        if (this.get == v) {
+            this.synchronized {
+                if(this.get == v) {
+                    this.set(u)
+                    //value = u
                     true
                 } else false
             }
         }
         else false
     }
-
-    def get = value
 }
 
 //Test
