@@ -2,7 +2,7 @@ import java.util.concurrent.atomic.AtomicReference
 import scala.concurrent._
 import scala.concurrent.duration.Duration
 
-class LazyAtomicReference[T](@volatile var value: T) {
+class LazyAtomicReference[T](@volatile var value: T = null) {
     def compareAndSet(v: => T, u: => T) = {
         if (value == v) {
             synchronized {
@@ -20,7 +20,7 @@ class LazyAtomicReference[T](@volatile var value: T) {
 
 //Test
 class Foo {
-    val s = new LazyAtomicReference[String](null)
+    val s = new LazyAtomicReference[String]()
 
     def foo(): String = {
         println("called")
