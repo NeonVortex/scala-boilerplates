@@ -10,7 +10,6 @@ class LazyAtomicReference[T](value: T = null) extends AtomicReference(value) {
             this.synchronized {
                 if(this.get == v) {
                     this.set(u)
-                    //value = u
                     true
                 } else false
             }
