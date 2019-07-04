@@ -1,5 +1,5 @@
 class LazyAtomicReference[T](@volatile var value: T = null) {
-    def compareAndSet(v: => T, u: => T) = {
+    def compareAndSet(v: T, u: => T) = {
         if (value == v) {
             synchronized {
                 if(value == v) {
