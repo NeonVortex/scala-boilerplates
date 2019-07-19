@@ -19,5 +19,5 @@ object Foo {
   }
 }
 
-Foo.foo
-Foo.bar
+println(Foo.foo)
+println(Foo.bar())
