@@ -1,5 +1,6 @@
 import java.util.concurrent.atomic.AtomicReference
 
+@deprecated("Use LazyVar instead")
 class LazyAtomicReference[T](value: T = null) extends AtomicReference(value) {
     
     def compareAndSet(v: T, u: () => T): Boolean =
