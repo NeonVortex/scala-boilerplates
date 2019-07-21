@@ -1,5 +1,6 @@
 import scala.language.implicitConversions
 
+@deprecated("Use LazyRef as var instead")
 class LazyVar[T](value: => T) {
   private[this] var _value: T = _
   private[this] var gen: () => T = () => value
