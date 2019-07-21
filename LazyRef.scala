@@ -1,7 +1,8 @@
 import scala.language.implicitConversions
 
 class LazyRef[T](value: => T) {
-  def apply(): T = value
+  lazy val _value = value
+  def apply(): T = _value
 }
 
 object LazyRef {
