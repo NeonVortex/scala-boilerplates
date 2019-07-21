@@ -1,6 +1,5 @@
 import scala.language.implicitConversions
 
-@deprecated("Use LazyRef as var instead")
 class LazyVar[T](value: => T) {
   private[this] var _value: T = _
   private[this] var gen: () => T = () => value
@@ -18,11 +17,26 @@ class LazyVar[T](value: => T) {
 
     _value
   }
-
+  
   def update(newValue: => T): Unit = synchronized {
     gen = () => newValue
     genCalled = false
   }
+  
+  def get: T = apply()
+  
+  def compareAndSet(v: T, u: => T): Boolean = {
+    if (this.get == v) {
+        this.synchronized {
+            if(this.get == v) {
+                this.update(u)
+                true
+            } else false
+        }
+    }
+    else false
+  }
+
 }
 
 object LazyVar {
