@@ -1,0 +1,9 @@
+trait ToDoubleFunction[T] { def apply(v: T): Double}
+trait ToIntFunction[T] { def apply(v: T): Int}
+trait ToLongFunction[T] { def apply(v: T): Long}
+trait ToCharFunction[T] { def apply(v: T): Char}
+trait ToShortFunction[T] { def apply(v: T): Short}
+trait ToUnitFunction[T] { def apply(v: T): Unit}
+trait ToFloatFunction[T] { def apply(v: T): Float}
+trait ToByteFunction[T] { def apply(v: T): Byte}
+trait ToBooleanFunction[T] { def apply(v: T): Boolean}
